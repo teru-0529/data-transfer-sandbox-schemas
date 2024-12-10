@@ -1,0 +1,180 @@
+data_type: define_elements
+version: 3.0.22
+create_at: 2024-12-10T18:00:47+09:00
+elements:
+  - name_jp: 受注番号
+    name_en: orderNo
+    domain: ID
+    reg_ex: null
+    min_digits: null
+    max_digits: null
+    min_value: null
+    max_value: null
+    example: 12
+    description: 受注番号(サロゲートキー)
+  - name_jp: 日付
+    name_en: sysDate
+    domain: 文字列
+    reg_ex: null
+    min_digits: null
+    max_digits: 8
+    min_value: null
+    max_value: null
+    example: "20241204"
+    description: 日付(YYYYMMDD)
+  - name_jp: 担当者名
+    name_en: operatorName
+    domain: 文字列
+    reg_ex: null
+    min_digits: 3
+    max_digits: 30
+    min_value: null
+    max_value: null
+    example: 織田信長
+    description: 担当者名称
+  - name_jp: 得意先名称
+    name_en: customerName
+    domain: 文字列
+    reg_ex: null
+    min_digits: null
+    max_digits: 50
+    min_value: null
+    max_value: null
+    example: 徳川商事株式会社
+    description: 受注先企業名
+  - name_jp: 金額
+    name_en: price
+    domain: 整数
+    reg_ex: null
+    min_digits: null
+    max_digits: null
+    min_value: 0
+    max_value: 9999999
+    example: 15000
+    description: 金額
+  - name_jp: 商品名
+    name_en: productName
+    domain: 文字列
+    reg_ex: null
+    min_digits: null
+    max_digits: 30
+    min_value: null
+    max_value: null
+    example: 日本刀
+    description: 商品名称
+  - name_jp: 数量
+    name_en: quantity
+    domain: 整数
+    reg_ex: null
+    min_digits: null
+    max_digits: null
+    min_value: 0
+    max_value: 1000
+    example: 13
+    description: 数量
+  - name_jp: 受注明細番号
+    name_en: orderDetailNo
+    domain: ID
+    reg_ex: null
+    min_digits: null
+    max_digits: null
+    min_value: null
+    max_value: null
+    example: 13
+    description: 受注明細番号(サロゲートキー)
+  - name_jp: 出荷済フラグ
+    name_en: shippingFlag
+    domain: 可否/フラグ
+    reg_ex: null
+    min_digits: null
+    max_digits: null
+    min_value: null
+    max_value: null
+    example: false
+    description: 商品出荷済みの場合にTrue
+  - name_jp: キャンセルフラグ
+    name_en: canceledFlag
+    domain: 可否/フラグ
+    reg_ex: null
+    min_digits: null
+    max_digits: null
+    min_value: null
+    max_value: null
+    example: false
+    description: 受注キャンセルの場合にTrue
+  - name_jp: 担当者ID
+    name_en: operatorId
+    domain: 文字列
+    reg_ex: null
+    min_digits: null
+    max_digits: 5
+    min_value: null
+    max_value: null
+    example: U0001
+    description: 担当者ID
+  - name_jp: 受注番号(WORK)
+    name_en: orderNoW
+    domain: NOKEY
+    reg_ex: ^RO-[0-9]{7}$
+    min_digits: 10
+    max_digits: 10
+    min_value: null
+    max_value: null
+    example: RO-0000001
+    description: 受注番号(新規採番)
+  - name_jp: 商品ID(WORK)
+    name_en: productIdW
+    domain: NOKEY
+    reg_ex: ^P[0-9]{4}$
+    min_digits: 5
+    max_digits: 5
+    min_value: null
+    max_value: null
+    example: P0001
+    description: 商品ID(新規採番)
+delive_elements:
+  - origin: 日付
+    name_jp: 受注日
+    name_en: orderDate
+    description: 受注日
+  - origin: 担当者名
+    name_jp: 受注担当者名
+    name_en: orderPIC
+    description: 受注担当者名
+  - origin: 金額
+    name_jp: 受注金額
+    name_en: totalOrderPrice
+    description: 受注総額
+  - origin: 金額
+    name_jp: 商品原価
+    name_en: costPrice
+    description: 商品原価
+  - origin: 数量
+    name_jp: 受注数
+    name_en: receivingQuantity
+    description: 受注数
+  - origin: 数量
+    name_jp: 出荷数
+    name_en: shippingQuantity
+    description: 出荷数
+  - origin: 数量
+    name_jp: キャンセル数
+    name_en: cancelQuantity
+    description: キャンセル数
+  - origin: 数量
+    name_jp: 受注残数
+    name_en: remainingQuantity
+    description: 受注残数
+  - origin: 金額
+    name_jp: 販売単価
+    name_en: selllingPrice
+    description: 販売単価
+  - origin: 日付
+    name_jp: キャンセル日
+    name_en: cancelDate
+    description: キャンセル日
+  - origin: 日付
+    name_jp: 出荷日
+    name_en: sippingDate
+    description: 出荷日
+segments: []
