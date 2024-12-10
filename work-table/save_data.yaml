@@ -1,12 +1,12 @@
 data_type: define_tables
 version: 3.2.7
-create_at: 2024-12-10T18:13:05+09:00
+create_at: 2024-12-10T20:17:46+09:00
 schema:
   name_jp: 移行用中間テーブル
   name_en: work
 tables:
   - name_jp: 受注番号
-    name_en: genOrderNo
+    name_en: gen_order_no
     is_master: false
     fields:
       - name: 受注番号(WORK)
@@ -26,12 +26,12 @@ tables:
         - 受注番号(WORK)
         - 商品ID(WORK)
       uniques:
-        - name: genOrderNo_unique_1
+        - name: gen_order_no_unique_1
           fields:
             - 受注番号
             - 受注明細番号
       foreign_keys:
-        - name: genOrderNo_foreignKey_1
+        - name: gen_order_no_foreignKey_1
           reference_table: 商品ID
           delete_option: CASCADE
           update_option: CASCADE
@@ -40,7 +40,7 @@ tables:
               ref: 商品ID(WORK)
     indexes: []
   - name_jp: 商品ID
-    name_en: genProductId
+    name_en: gen_product_id
     is_master: false
     fields:
       - name: 商品ID(WORK)
@@ -52,6 +52,9 @@ tables:
     constraint:
       primary_key:
         - 商品ID(WORK)
-      uniques: []
+      uniques:
+        - name: gen_product_id_unique_1
+          fields:
+            - 商品名
       foreign_keys: []
     indexes: []

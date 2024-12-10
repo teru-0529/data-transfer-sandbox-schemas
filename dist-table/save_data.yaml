@@ -1,6 +1,6 @@
 data_type: define_tables
 version: 3.2.7
-create_at: 2024-12-10T18:35:58+09:00
+create_at: 2024-12-10T19:38:49+09:00
 schema:
   name_jp: 移行先システム
   name_en: dist

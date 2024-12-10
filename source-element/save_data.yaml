@@ -1,10 +1,10 @@
 data_type: define_elements
 version: 3.0.22
-create_at: 2024-12-10T18:00:47+09:00
+create_at: 2024-12-10T20:17:12+09:00
 elements:
   - name_jp: 受注番号
     name_en: orderNo
-    domain: ID
+    domain: 整数
     reg_ex: null
     min_digits: null
     max_digits: null
@@ -74,7 +74,7 @@ elements:
     description: 数量
   - name_jp: 受注明細番号
     name_en: orderDetailNo
-    domain: ID
+    domain: 整数
     reg_ex: null
     min_digits: null
     max_digits: null
