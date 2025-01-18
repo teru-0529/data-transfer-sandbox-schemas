@@ -1,72 +1,36 @@
 services:
-  source-db:
+  db:
     image: postgres:${POSTGRES_VERSION}-bookworm
-    container_name: source-db
+    container_name: product-db
     ports:
-      - ${SOURCE_POSTGRES_PORT}:5432
+      - ${PRODUCT_POSTGRES_PORT}:5432
     environment:
       TZ: ${TIME_ZONE}
       PGTZ: ${TIME_ZONE}
-      POSTGRES_USER: ${SOURCE_POSTGRES_USER}
-      POSTGRES_PASSWORD: ${SOURCE_POSTGRES_PASSWORD}
-      POSTGRES_DB: ${SOURCE_POSTGRES_DB}
+      POSTGRES_USER: ${PRODUCT_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${PRODUCT_POSTGRES_PASSWORD}
+      POSTGRES_DB: ${PRODUCT_POSTGRES_DB}
     tty: true
     restart: always
     healthcheck:  # コンテナの起動チェック
-      test: ["CMD-SHELL", "pg_isready -U $SOURCE_POSTGRES_USER"]
+      test: ["CMD-SHELL", "pg_isready -U $PRODUCT_POSTGRES_USER"]
       interval: 10s
       timeout: 5s
       retries: 5
-      start_period: 20s
+      start_period: 10s
     volumes:
-      - ./data/source:/docker-entrypoint-initdb.d
+      - ./data:/docker-entrypoint-initdb.d
 
-  source-pgweb:
+  pgweb:
     image: sosedoff/pgweb
-    container_name: source-pgweb
+    container_name: product-pgweb
     ports:
-      - ${SOURCE_PGWEB_PORT}:8081
+      - ${PRODUCT_PGWEB_PORT}:8081
     environment:
       TZ: ${TIME_ZONE}
       PGTZ: ${TIME_ZONE}
-      DATABASE_URL: postgres://${SOURCE_POSTGRES_USER}:${SOURCE_POSTGRES_PASSWORD}@source-db:5432/${SOURCE_POSTGRES_DB}?sslmode=disable
+      DATABASE_URL: postgres://${PRODUCT_POSTGRES_USER}:${PRODUCT_POSTGRES_PASSWORD}@db:5432/${PRODUCT_POSTGRES_DB}?sslmode=disable
     restart: always
     depends_on:
-      source-db:
-        condition: service_healthy
-
-  dist-db:
-    image: postgres:${POSTGRES_VERSION}-bookworm
-    container_name: dist-db
-    ports:
-      - ${DIST_POSTGRES_PORT}:5432
-    environment:
-      TZ: ${TIME_ZONE}
-      PGTZ: ${TIME_ZONE}
-      POSTGRES_USER: ${DIST_POSTGRES_USER}
-      POSTGRES_PASSWORD: ${DIST_POSTGRES_PASSWORD}
-      POSTGRES_DB: ${DIST_POSTGRES_DB}
-    tty: true
-    restart: always
-    healthcheck:  # コンテナの起動チェック
-      test: ["CMD-SHELL", "pg_isready -U $DIST_POSTGRES_USER"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 20s
-    volumes:
-      - ./data/dist:/docker-entrypoint-initdb.d
-
-  dist-pgweb:
-    image: sosedoff/pgweb
-    container_name: dist-pgweb
-    ports:
-      - ${DIST_PGWEB_PORT}:8081
-    environment:
-      TZ: ${TIME_ZONE}
-      PGTZ: ${TIME_ZONE}
-      DATABASE_URL: postgres://${DIST_POSTGRES_USER}:${DIST_POSTGRES_PASSWORD}@dist-db:5432/${DIST_POSTGRES_DB}?sslmode=disable
-    restart: always
-    depends_on:
-      dist-db:
+      db:
         condition: service_healthy
