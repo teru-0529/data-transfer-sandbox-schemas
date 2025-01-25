@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS orders.orders CASCADE;
 CREATE TABLE orders.orders (
   order_no varchar(10) NOT NULL check (order_no ~* '^RO-[0-9]{7}$'),
   order_date date NOT NULL DEFAULT current_timestamp,
-  order_pic varchar(5) NOT NULL check (order_pic ~* '^U[0-9]{4}$'),
+  order_pic varchar(5) NOT NULL check (LENGTH(order_pic) = 5),
   customer_name varchar(50) NOT NULL,
   total_order_price integer NOT NULL DEFAULT 0 check (0 <= total_order_price AND total_order_price <= 9999999),
   remaining_order_price integer NOT NULL DEFAULT 0 check (0 <= remaining_order_price AND remaining_order_price <= 9999999),

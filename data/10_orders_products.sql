@@ -8,7 +8,7 @@ CREATE TABLE orders.products (
   product_id varchar(5) NOT NULL check (product_id ~* '^P[0-9]{4}$'),
   product_name varchar(30) NOT NULL,
   cost_price integer NOT NULL DEFAULT 0 check (0 <= cost_price AND cost_price <= 9999999),
-  product_pic varchar(5) NOT NULL check (product_pic ~* '^U[0-9]{4}$'),
+  product_pic varchar(5) NOT NULL check (LENGTH(product_pic) = 5),
   product_status orders.product_status NOT NULL DEFAULT 'PREPARING',
   created_at timestamp NOT NULL DEFAULT current_timestamp,
   updated_at timestamp NOT NULL DEFAULT current_timestamp,

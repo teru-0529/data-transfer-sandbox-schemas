@@ -5,8 +5,8 @@
 -- Create Table
 DROP TABLE IF EXISTS orders.operators CASCADE;
 CREATE TABLE orders.operators (
-  operator_id varchar(5) NOT NULL check (operator_id ~* '^U[0-9]{4}$'),
-  operator_name varchar(30) NOT NULL check (LENGTH(operator_name) >= 3),
+  operator_id varchar(5) NOT NULL check (LENGTH(operator_id) = 5),
+  operator_name varchar(30) NOT NULL,
   created_at timestamp NOT NULL DEFAULT current_timestamp,
   updated_at timestamp NOT NULL DEFAULT current_timestamp,
   created_by varchar(58),
