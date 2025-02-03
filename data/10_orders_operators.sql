@@ -41,13 +41,13 @@ DROP FUNCTION IF EXISTS orders.operators_audit();
 CREATE OR REPLACE FUNCTION orders.operators_audit() RETURNS TRIGGER AS $$
 BEGIN
   IF (TG_OP = 'DELETE') THEN
-    INSERT INTO operation_histories(schema_name, table_name, operation_type, table_key)
+    INSERT INTO public.operation_histories(schema_name, table_name, operation_type, table_key)
     SELECT TG_TABLE_SCHEMA, TG_TABLE_NAME, 'DELETE', OLD.operator_id;
   ELSIF (TG_OP = 'UPDATE') THEN
-    INSERT INTO operation_histories(operated_by, schema_name, table_name, operation_type, table_key)
+    INSERT INTO public.operation_histories(operated_by, schema_name, table_name, operation_type, table_key)
     SELECT NEW.updated_by, TG_TABLE_SCHEMA, TG_TABLE_NAME, 'UPDATE', NEW.operator_id;
   ELSIF (TG_OP = 'INSERT') THEN
-    INSERT INTO operation_histories(operated_by, schema_name, table_name, operation_type, table_key)
+    INSERT INTO public.operation_histories(operated_by, schema_name, table_name, operation_type, table_key)
     SELECT NEW.updated_by, TG_TABLE_SCHEMA, TG_TABLE_NAME, 'INSERT', NEW.operator_id;
   END IF;
   RETURN null;

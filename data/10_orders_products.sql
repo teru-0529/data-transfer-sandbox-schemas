@@ -52,13 +52,13 @@ DROP FUNCTION IF EXISTS orders.products_audit();
 CREATE OR REPLACE FUNCTION orders.products_audit() RETURNS TRIGGER AS $$
 BEGIN
   IF (TG_OP = 'DELETE') THEN
-    INSERT INTO operation_histories(schema_name, table_name, operation_type, table_key)
+    INSERT INTO public.operation_histories(schema_name, table_name, operation_type, table_key)
     SELECT TG_TABLE_SCHEMA, TG_TABLE_NAME, 'DELETE', OLD.product_id;
   ELSIF (TG_OP = 'UPDATE') THEN
-    INSERT INTO operation_histories(operated_by, schema_name, table_name, operation_type, table_key)
+    INSERT INTO public.operation_histories(operated_by, schema_name, table_name, operation_type, table_key)
     SELECT NEW.updated_by, TG_TABLE_SCHEMA, TG_TABLE_NAME, 'UPDATE', NEW.product_id;
   ELSIF (TG_OP = 'INSERT') THEN
-    INSERT INTO operation_histories(operated_by, schema_name, table_name, operation_type, table_key)
+    INSERT INTO public.operation_histories(operated_by, schema_name, table_name, operation_type, table_key)
     SELECT NEW.updated_by, TG_TABLE_SCHEMA, TG_TABLE_NAME, 'INSERT', NEW.product_id;
   END IF;
   RETURN null;

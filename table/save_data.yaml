@@ -1,6 +1,6 @@
 data_type: define_tables
-version: 3.2.7
-create_at: 2025-01-25T20:50:47+09:00
+version: 3.2.8
+create_at: 2025-01-30T21:33:13+09:00
 schema:
   name_jp: 受注
   name_en: orders
